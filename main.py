@@ -29,7 +29,8 @@ async def on_raw_reaction_add(payload):
       member = discord.utils.find(lambda m : m.id == payload.user_id, guild.members)
       if member is not None:
         await member.add_roles(role)
-        print("done")
+        print(str(payload.member.name) + "#" + str(payload.member.discriminator) + " took the " +str(payload.emoji.name) + " role"
+             )
       else:
         print("member not found")
     else:
@@ -46,8 +47,11 @@ async def on_raw_reaction_remove(payload):
     if role is not None:
       member = discord.utils.find(lambda m : m.id == payload.user_id, guild.members)
       if member is not None:
+        print("Removed Role:\n" + str(payload)
+             )
         await member.remove_roles(role)
-        print("done")
+
+
       else:
         print("member not found")
     else:
