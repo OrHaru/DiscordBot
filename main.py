@@ -192,6 +192,10 @@ async def on_voice_state_update(member, before, after):
       await channel.send(embed=embed2)
 
 
+############################################################################################
+
+##############################################################################################
+
 #my_secret = os.environ['TOKEN']
 keep_alive()
 client.run(os.getenv('TOKEN'))
