@@ -1,5 +1,6 @@
 import os
 import discord
+from keep_alive import keep_alive
 
 client = discord.Client(intents=discord.Intents.all())
 
@@ -81,4 +82,5 @@ async def on_member_join(member):
 
 
 #my_secret = os.environ['TOKEN']
+keep_alive()
 client.run(os.getenv('TOKEN'))
