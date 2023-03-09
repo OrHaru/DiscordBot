@@ -63,14 +63,21 @@ async def on_raw_reaction_remove(payload):
 
 @client.event
 async def on_member_join(member):
-  embed = discord.Embed(
+  embed1 = discord.Embed(
     title="Welcome to Expensive Brothers server",
     description=
     "To browse and select from various roles, visit the roles channel:\n" +
     "https://discord.com/channels/648219887344418816/944307930960920616/1027311476450537504\n"
     + "Enjoy :)",
     color=0xFF5733)
-  await member.send(embed=embed)
+  await member.send(embed=embed1)
+  embed2 = discord.Embed(title="User joined the server",
+                         description=member.mention + " " +
+                         str(member.joined_at),
+                         color=0xFF5733)
+  channel = member.guild.get_channel(1083167098609614988)
+  await channel.send(embed=embed2)
+  print(member)
 
 
 #my_secret = os.environ['TOKEN']
