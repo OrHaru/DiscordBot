@@ -182,13 +182,14 @@ async def on_voice_state_update(member, before, after):
                            str(before.channel.name),
                            color=0xFF5733)
     await channel.send(embed=embed2)
-  if before.channel.id != after.channel.id:
-    embed2 = discord.Embed(title="Channel",
-                           description=str(member.name) + " moved from " +
-                           str(before.channel.name) + " to " +
-                           str(after.channel.name),
-                           color=0xFF5733)
-    await channel.send(embed=embed2)
+  if before.channel is not None and after.channel is not None:
+    if before.channel.id != after.channel.id:
+      embed2 = discord.Embed(title="Channel",
+                             description=str(member.name) + " moved from " +
+                             str(before.channel.name) + " to " +
+                             str(after.channel.name),
+                             color=0xFF5733)
+      await channel.send(embed=embed2)
 
 
 #my_secret = os.environ['TOKEN']
