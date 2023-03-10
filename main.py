@@ -1,8 +1,11 @@
 import os
 import discord
 from keep_alive import keep_alive
+from discord.ext import commands
+import datetime
 
 client = discord.Client(intents=discord.Intents.all())
+DISCORD_TOKEN = os.getenv("TOKEN")
 invites = {}
 
 
@@ -171,31 +174,35 @@ async def on_member_remove(member):
 async def on_voice_state_update(member, before, after):
   channel = member.guild.get_channel(1083335174504329276)
   if before.channel is None and after.channel is not None:
-    embed2 = discord.Embed(title="Channel",
-                           description=str(member.name) + " joined " +
-                           str(after.channel.name),
-                           color=0xFF5733)
+    embed2 = discord.Embed(
+      title=str(member.name) + "#" + str(member.discriminator) +
+      " - Channel Join",
+      description=member.mention + " joined " + str(after.channel.name) +
+      " (" + after.channel.mention + ")",
+      color=0xFF5733,
+      timestamp=datetime.datetime.utcnow()).set_thumbnail(url=member.avatar)
     await channel.send(embed=embed2)
   if before.channel is not None and after.channel is None:
-    embed2 = discord.Embed(title="Channel",
-                           description=str(member.name) + " left " +
-                           str(before.channel.name),
-                           color=0xFF5733)
+    embed2 = discord.Embed(
+      title=str(member.name) + "#" + str(member.discriminator) +
+      " - Channel Leave",
+      description=member.mention + " left " + str(before.channel.name) + " (" +
+      before.channel.mention + ")",
+      color=0xFF5733,
+      timestamp=datetime.datetime.utcnow()).set_thumbnail(url=member.avatar)
     await channel.send(embed=embed2)
   if before.channel is not None and after.channel is not None:
     if before.channel.id != after.channel.id:
-      embed2 = discord.Embed(title="Channel",
-                             description=str(member.name) + " moved from " +
-                             str(before.channel.name) + " to " +
-                             str(after.channel.name),
-                             color=0xFF5733)
+      embed2 = discord.Embed(
+        title=str(member.name) + "#" + str(member.discriminator) +
+        " - Channel Switch",
+        description=member.mention + " - " + str(before.channel.name) + " (" +
+        before.channel.mention + ") " + " ➡️ " + str(after.channel.name) +
+        " (" + after.channel.mention + ")",
+        color=0xFF5733,
+        timestamp=datetime.datetime.utcnow()).set_thumbnail(url=member.avatar)
       await channel.send(embed=embed2)
 
 
-############################################################################################
-
-##############################################################################################
-
-#my_secret = os.environ['TOKEN']
 keep_alive()
 client.run(os.getenv('TOKEN'))
