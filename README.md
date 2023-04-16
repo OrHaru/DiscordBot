@@ -1,2 +1,2 @@
 # DiscordBot
- A discord bot I wrote in python for the private use of my friends' and includes temporary channels with functioning button panel to control the temporary channel.
+ I created a Python-based Discord bot for my friends' private use, featuring temporary channels with a functional button panel for streamlined control.
